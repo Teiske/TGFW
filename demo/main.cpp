@@ -8,8 +8,7 @@
 #include <common/camera.h>
 #include <common/sprite.h>
 
-int main( void )
-{
+int main(void) {
 	Renderer renderer(1280, 720);
 
 	Sprite* pencils = new Sprite("assets/pencils.tga");
@@ -39,8 +38,7 @@ int main( void )
 		glfwPollEvents();
 
 	} // Check if the ESC key was pressed or the window was closed
-	while( glfwGetKey(renderer.window(), GLFW_KEY_ESCAPE ) != GLFW_PRESS &&
-		   glfwWindowShouldClose(renderer.window()) == 0 );
+	while( glfwGetKey(renderer.window(), GLFW_KEY_ESCAPE ) != GLFW_PRESS && glfwWindowShouldClose(renderer.window()) == 0 );
 
 	delete pencils;
 	delete kingkong;

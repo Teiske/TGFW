@@ -10,8 +10,7 @@
 
 #include <common/sprite.h>
 
-class Renderer
-{
+class Renderer {
 	public:
 		Renderer(unsigned int w, unsigned int h);
 		virtual ~Renderer();

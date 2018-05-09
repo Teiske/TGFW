@@ -6,19 +6,18 @@ glm::mat4 _viewMatrix;
 glm::vec3 position = glm::vec3( 0, 0, 5 );
 glm::vec3 cursor = glm::vec3( 0, 0, 0 );
 
-glm::mat4 getViewMatrix(){
+glm::mat4 getViewMatrix() {
 	return _viewMatrix;
 }
 
-glm::vec3 getCursor(){
+glm::vec3 getCursor() {
 	return cursor;
 }
 
 float speed = 300.0f; // 300 units / second
 
 
-void computeMatricesFromInputs(GLFWwindow* window)
-{
+void computeMatricesFromInputs(GLFWwindow* window) {
 	// glfwGetTime is called only once, the first time this function is called
 	static double lastTime = glfwGetTime();
 
@@ -36,19 +35,19 @@ void computeMatricesFromInputs(GLFWwindow* window)
 	glm::vec3 up = glm::vec3(0, -1, 0);
 
 	// Move up
-	if (glfwGetKey( window, GLFW_KEY_UP ) == GLFW_PRESS){
+	if (glfwGetKey( window, GLFW_KEY_UP ) == GLFW_PRESS) {
 		position += up * deltaTime * speed;
 	}
 	// Move down
-	if (glfwGetKey( window, GLFW_KEY_DOWN ) == GLFW_PRESS){
+	if (glfwGetKey( window, GLFW_KEY_DOWN ) == GLFW_PRESS) {
 		position -= up * deltaTime * speed;
 	}
 	// Strafe right
-	if (glfwGetKey( window, GLFW_KEY_RIGHT ) == GLFW_PRESS){
+	if (glfwGetKey( window, GLFW_KEY_RIGHT ) == GLFW_PRESS) {
 		position += right * deltaTime * speed;
 	}
 	// Strafe left
-	if (glfwGetKey( window, GLFW_KEY_LEFT ) == GLFW_PRESS){
+	if (glfwGetKey( window, GLFW_KEY_LEFT ) == GLFW_PRESS) {
 		position -= right * deltaTime * speed;
 	}
 

@@ -7,26 +7,22 @@
 #include <common/camera.h>
 #include <common/renderer.h>
 
-Renderer::Renderer(unsigned int w, unsigned int h)
-{
+Renderer::Renderer(unsigned int w, unsigned int h) {
 	_window_width = w;
 	_window_height = h;
 
 	this->init();
 }
 
-Renderer::~Renderer()
-{
+Renderer::~Renderer() {
 	// Cleanup VBO and shader
 	glDeleteProgram(_programID);
 }
 
-int Renderer::init()
-{
+int Renderer::init() {
 	// Initialise GLFW
-	if( !glfwInit() )
-	{
-		fprintf( stderr, "Failed to initialize GLFW\n" );
+	if(!glfwInit()) {
+		fprintf(stderr, "Failed to initialize GLFW\n");
 		return -1;
 	}
 
@@ -36,8 +32,8 @@ int Renderer::init()
 
 	// Open a window and create its OpenGL context
 	_window = glfwCreateWindow( _window_width, _window_height, "Demo", NULL, NULL);
-	if( _window == NULL ){
-		fprintf( stderr, "Failed to open GLFW window.\n" );
+	if(_window == NULL) {
+		fprintf(stderr, "Failed to open GLFW window.\n");
 		glfwTerminate();
 		return -1;
 	}
@@ -74,8 +70,7 @@ int Renderer::init()
 	return 0;
 }
 
-void Renderer::renderSprite(Sprite* sprite, float px, float py, float sx, float sy, float rot)
-{
+void Renderer::renderSprite(Sprite* sprite, float px, float py, float sx, float sy, float rot) {
 	glm::mat4 viewMatrix  = getViewMatrix(); // get from Camera (Camera position and direction)
 	glm::mat4 modelMatrix = glm::mat4(1.0f);
 
@@ -133,8 +128,7 @@ void Renderer::renderSprite(Sprite* sprite, float px, float py, float sx, float 
 	glDisableVertexAttribArray(vertexUVID);
 }
 
-GLuint Renderer::loadShaders(const char* vertex_file_path, const char* fragment_file_path)
-{
+GLuint Renderer::loadShaders(const char* vertex_file_path, const char* fragment_file_path) {
 	// Create the shaders
 	GLuint vertexShaderID = glCreateShader(GL_VERTEX_SHADER);
 	GLuint fragmentShaderID = glCreateShader(GL_FRAGMENT_SHADER);
@@ -142,7 +136,7 @@ GLuint Renderer::loadShaders(const char* vertex_file_path, const char* fragment_
 	// Read the Vertex Shader code from the file
 	std::string vertexShaderCode;
 	std::ifstream vertexShaderStream(vertex_file_path, std::ios::in);
-	if (vertexShaderStream.is_open()){
+	if (vertexShaderStream.is_open()) {
 		std::string line = "";
 		while (getline(vertexShaderStream, line)) {
 			vertexShaderCode += "\n" + line;
@@ -157,7 +151,7 @@ GLuint Renderer::loadShaders(const char* vertex_file_path, const char* fragment_
 	// Read the Fragment Shader code from the file
 	std::string fragmentShaderCode;
 	std::ifstream fragmentShaderStream(fragment_file_path, std::ios::in);
-	if (fragmentShaderStream.is_open()){
+	if (fragmentShaderStream.is_open()) {
 		std::string line = "";
 		while (getline(fragmentShaderStream, line)) {
 			fragmentShaderCode += "\n" + line;
@@ -177,7 +171,7 @@ GLuint Renderer::loadShaders(const char* vertex_file_path, const char* fragment_
 	// Check Vertex Shader
 	glGetShaderiv(vertexShaderID, GL_COMPILE_STATUS, &result);
 	glGetShaderiv(vertexShaderID, GL_INFO_LOG_LENGTH, &infoLogLength);
-	if ( infoLogLength > 0 ){
+	if (infoLogLength > 0) {
 		std::vector<char> vertexShaderErrorMessage(infoLogLength+1);
 		glGetShaderInfoLog(vertexShaderID, infoLogLength, NULL, &vertexShaderErrorMessage[0]);
 		printf("%s\n", &vertexShaderErrorMessage[0]);
@@ -192,7 +186,7 @@ GLuint Renderer::loadShaders(const char* vertex_file_path, const char* fragment_
 	// Check Fragment Shader
 	glGetShaderiv(fragmentShaderID, GL_COMPILE_STATUS, &result);
 	glGetShaderiv(fragmentShaderID, GL_INFO_LOG_LENGTH, &infoLogLength);
-	if ( infoLogLength > 0 ){
+	if (infoLogLength > 0) {
 		std::vector<char> fragmentShaderErrorMessage(infoLogLength+1);
 		glGetShaderInfoLog(fragmentShaderID, infoLogLength, NULL, &fragmentShaderErrorMessage[0]);
 		printf("%s\n", &fragmentShaderErrorMessage[0]);
@@ -208,7 +202,7 @@ GLuint Renderer::loadShaders(const char* vertex_file_path, const char* fragment_
 	// Check the program
 	glGetProgramiv(programID, GL_LINK_STATUS, &result);
 	glGetProgramiv(programID, GL_INFO_LOG_LENGTH, &infoLogLength);
-	if ( infoLogLength > 0 ){
+	if (infoLogLength > 0) {
 		std::vector<char> programErrorMessage(infoLogLength+1);
 		glGetProgramInfoLog(programID, infoLogLength, NULL, &programErrorMessage[0]);
 		printf("%s\n", &programErrorMessage[0]);

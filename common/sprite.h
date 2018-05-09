@@ -5,8 +5,7 @@
 
 #include <GL/glew.h>
 
-class Sprite
-{
+class Sprite {
 	public:
 		Sprite(std::string image_path);
 		virtual ~Sprite();
