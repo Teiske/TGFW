@@ -1,6 +1,6 @@
 # CMake entry point
 cmake_minimum_required (VERSION 2.6)
-project (MyFramework)
+project (TGFW)
 
 find_package(OpenGL REQUIRED)
 
@@ -69,7 +69,7 @@ add_library(common
 
 # Demo
 add_executable(demo
-	demo/demo.cpp
+	demo/main.cpp
 )
 target_link_libraries(demo
 	common
