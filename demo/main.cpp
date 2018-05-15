@@ -38,39 +38,18 @@
 int main(void) {
 	Renderer renderer(800, 600);
 
-	float vertices[] = {
+	static const GLfloat g_vertex_buffer_data[] = {
 		-0.5f, -0.5f, 0.0f,
 		 0.5f, -0.5f, 0.0f,
 		 0.0f,  0.5f, 0.0f
 	};
 
-	//GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
-	//GLuint fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-
-	//std::string vertShaderStr = readFile("shaders/vertex.vert");
-	//std::string fragShaderStr = readFile("shaders/fragment.frag");
-	//const char *vertShaderSrc = vertShaderStr.c_str();
-	//const char *fragShaderSrc = fragShaderStr.c_str();
-
-	//glShaderSource(vertexShader, 1, &vertShaderSrc, NULL);
-	//glCompileShader(vertexShader);
-
-	//glShaderSource(fragmentShader, 1, &fragShaderSrc, NULL);
-	//glCompileShader(fragmentShader);
-
-	//unsigned int shaderProgram;
-	//shaderProgram = glCreateProgram();
-
-	//glAttachShader(shaderProgram, vertexShader);
-	//glAttachShader(shaderProgram, fragmentShader);
-	//glLinkProgram(shaderProgram);
-
-	GLuint _programID = LoadShaders("shaders/vertex.vert", "shaders/fragment.frag");
+	GLuint programID = LoadShaders("shaders/vertex.vert", "shaders/fragment.frag");
 
 	unsigned int VBO, VAO;
 	glGenBuffers(1, &VBO);
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW);
 
 	glGenVertexArrays(1, &VAO);
 
@@ -78,7 +57,7 @@ int main(void) {
 	glBindVertexArray(VAO);
 	// 2. copy our vertices array in a buffer for OpenGL to use
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW);
 	// 3. then set our vertex attributes pointers
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
@@ -97,7 +76,7 @@ int main(void) {
 		computeMatricesFromInputs(renderer.window());
 
 		// 4. draw the object
-		glUseProgram(_programID);
+		glUseProgram(programID);
 		glBindVertexArray(VAO);
 		glDrawArrays(GL_TRIANGLES, 0, 3);
 
