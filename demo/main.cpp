@@ -97,6 +97,7 @@ int main(void) {
 		computeMatricesFromInputs(renderer.window());
 
 		// 4. draw the object
+		glUseProgram(_programID);
 		glBindVertexArray(VAO);
 		glDrawArrays(GL_TRIANGLES, 0, 3);
 
