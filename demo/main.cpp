@@ -4,32 +4,37 @@
 // Include GLFW
 #include <glfw3.h>
 
-#include <cstdio>
-#include <cstdlib>
 #include <string>
-#include <vector>
+#include <iostream>
 #include <fstream>
+#include <vector>
+#include <algorithm>
 
 #include <common/renderer.h>
 #include <common/camera.h>
 #include <common/sprite.h>
 
-const char* vertexShaderSource = /*"shaders/vertex.vert";*/
-	"#version 330 core\n"
-    "layout (location = 0) in vec3 aPos;\n"
-    "void main()\n"
-    "{\n"
-    "   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
-	"}\0";
-const char* fragmentShaderSource = "#version 330 core\n"
-	"out vec4 FragColor;\n"
-	"void main()\n"
-	"{\n"
-	"   FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);\n"
-	"}\n\0";
+std::string readFile(const char *filePath) {
+	std::string content;
+	std::ifstream fileStream(filePath, std::ios::in);
+
+	if (!fileStream.is_open()) {
+		std::cerr << "Could not read file " << filePath << ". File does not exist." << std::endl;
+		return "";
+	}
+
+	std::string line = "";
+	while (!fileStream.eof()) {
+		std::getline(fileStream, line);
+		content.append(line + "\n");
+	}
+
+	fileStream.close();
+	return content;
+}
 
 int main(void) {
-	Renderer renderer(1280, 720);
+	Renderer renderer(800, 600);
 
 	float vertices[] = {
 		-0.5f, -0.5f, 0.0f,
@@ -37,19 +42,24 @@ int main(void) {
 		 0.0f,  0.5f, 0.0f
 	};
 
+	GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
+	GLuint fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
+
+	std::string vertShaderStr = readFile("shaders/vertex.vert");
+	std::string fragShaderStr = readFile("shaders/fragment.frag");
+	const char *vertShaderSrc = vertShaderStr.c_str();
+	const char *fragShaderSrc = fragShaderStr.c_str();
+
 	unsigned int VBO;
 	glGenBuffers(1, &VBO);
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
-	unsigned int vertexShader;
-	vertexShader = glCreateShader(GL_VERTEX_SHADER);
-	glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
+	glShaderSource(vertexShader, 1, &vertShaderSrc, NULL);
 	glCompileShader(vertexShader);
 
-	unsigned int fragmentShader;
-	fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-	glShaderSource(fragmentShader, 1, &fragmentShaderSource, NULL);
+	
+	glShaderSource(fragmentShader, 1, &fragShaderSrc, NULL);
 	glCompileShader(fragmentShader);
 
 	unsigned int shaderProgram;
@@ -83,7 +93,6 @@ int main(void) {
 	/*Sprite* pencils = new Sprite("assets/pencils.tga");
 	Sprite* kingkong = new Sprite("assets/kingkong.tga");
 	Sprite* rgba = new Sprite("assets/rgba.tga");
-
 	float rot_z = 0.0f;*/
 
 	do {
@@ -93,7 +102,6 @@ int main(void) {
 		// Compute the ViewMatrix from keyboard and mouse input (see: camera.h/cpp)
 		computeMatricesFromInputs(renderer.window());
 
-		// ..:: Drawing code (in render loop) :: ..
 		// 4. draw the object
 		glUseProgram(shaderProgram);
 		glBindVertexArray(VAO);
