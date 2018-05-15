@@ -31,7 +31,7 @@ int Renderer::init() {
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
 
 	// Open a window and create its OpenGL context
-	_window = glfwCreateWindow( _window_width, _window_height, "Demo", NULL, NULL);
+	_window = glfwCreateWindow( _window_width, _window_height, "TGFW", NULL, NULL);
 	if(_window == NULL) {
 		fprintf(stderr, "Failed to open GLFW window.\n");
 		glfwTerminate();
