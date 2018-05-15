@@ -13,25 +13,27 @@
 #include <common/renderer.h>
 #include <common/camera.h>
 #include <common/sprite.h>
+#include <common/shader.h>
 
-std::string readFile(const char *filePath) {
-	std::string content;
-	std::ifstream fileStream(filePath, std::ios::in);
 
-	if (!fileStream.is_open()) {
-		std::cerr << "Could not read file " << filePath << ". File does not exist." << std::endl;
-		return "";
-	}
-
-	std::string line = "";
-	while (!fileStream.eof()) {
-		std::getline(fileStream, line);
-		content.append(line + "\n");
-	}
-
-	fileStream.close();
-	return content;
-}
+//std::string readFile(const char *filePath) {
+//	std::string content;
+//	std::ifstream fileStream(filePath, std::ios::in);
+//
+//	if (!fileStream.is_open()) {
+//		std::cerr << "Could not read file " << filePath << ". File does not exist." << std::endl;
+//		return "";
+//	}
+//
+//	std::string line = "";
+//	while (!fileStream.eof()) {
+//		std::getline(fileStream, line);
+//		content.append(line + "\n");
+//	}
+//
+//	fileStream.close();
+//	return content;
+//}
 
 int main(void) {
 	Renderer renderer(800, 600);
@@ -42,42 +44,34 @@ int main(void) {
 		 0.0f,  0.5f, 0.0f
 	};
 
-	GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
-	GLuint fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
+	//GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
+	//GLuint fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
 
-	std::string vertShaderStr = readFile("shaders/vertex.vert");
-	std::string fragShaderStr = readFile("shaders/fragment.frag");
-	const char *vertShaderSrc = vertShaderStr.c_str();
-	const char *fragShaderSrc = fragShaderStr.c_str();
+	//std::string vertShaderStr = readFile("shaders/vertex.vert");
+	//std::string fragShaderStr = readFile("shaders/fragment.frag");
+	//const char *vertShaderSrc = vertShaderStr.c_str();
+	//const char *fragShaderSrc = fragShaderStr.c_str();
 
-	unsigned int VBO;
+	//glShaderSource(vertexShader, 1, &vertShaderSrc, NULL);
+	//glCompileShader(vertexShader);
+
+	//glShaderSource(fragmentShader, 1, &fragShaderSrc, NULL);
+	//glCompileShader(fragmentShader);
+
+	//unsigned int shaderProgram;
+	//shaderProgram = glCreateProgram();
+
+	//glAttachShader(shaderProgram, vertexShader);
+	//glAttachShader(shaderProgram, fragmentShader);
+	//glLinkProgram(shaderProgram);
+
+	GLuint _programID = LoadShaders("shaders/vertex.vert", "shaders/fragment.frag");
+
+	unsigned int VBO, VAO;
 	glGenBuffers(1, &VBO);
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
-	glShaderSource(vertexShader, 1, &vertShaderSrc, NULL);
-	glCompileShader(vertexShader);
-
-	
-	glShaderSource(fragmentShader, 1, &fragShaderSrc, NULL);
-	glCompileShader(fragmentShader);
-
-	unsigned int shaderProgram;
-	shaderProgram = glCreateProgram();
-
-	glAttachShader(shaderProgram, vertexShader);
-	glAttachShader(shaderProgram, fragmentShader);
-	glLinkProgram(shaderProgram);
-
-	glUseProgram(shaderProgram);
-
-	glDeleteShader(vertexShader);
-	glDeleteShader(fragmentShader);
-
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-	glEnableVertexAttribArray(0);
-
-	unsigned int VAO;
 	glGenVertexArrays(1, &VAO);
 
 	// 1. bind Vertex Array Object
@@ -90,10 +84,10 @@ int main(void) {
 	glEnableVertexAttribArray(0);
 
 
-	/*Sprite* pencils = new Sprite("assets/pencils.tga");
-	Sprite* kingkong = new Sprite("assets/kingkong.tga");
-	Sprite* rgba = new Sprite("assets/rgba.tga");
-	float rot_z = 0.0f;*/
+	//Sprite* pencils = new Sprite("assets/pencils.tga");
+	//Sprite* kingkong = new Sprite("assets/kingkong.tga");
+	//Sprite* rgba = new Sprite("assets/rgba.tga");
+	//float rot_z = 0.0f;
 
 	do {
 		// Clear the screen
@@ -103,18 +97,15 @@ int main(void) {
 		computeMatricesFromInputs(renderer.window());
 
 		// 4. draw the object
-		glUseProgram(shaderProgram);
 		glBindVertexArray(VAO);
 		glDrawArrays(GL_TRIANGLES, 0, 3);
 
-		//glm::vec3 cursor = getCursor(); // from Camera
-		//printf("(%f,%f)\n",cursor.x, cursor.y);
 
 		// Render all Sprites (Sprite*, xpos, ypos, xscale, yscale, rotation)
-		/*renderer.renderSprite(pencils, 400, 300, 1.0f, 1.0f, 0.0f);
-		renderer.renderSprite(kingkong, 900, 400, 1.0f, 1.0f, 0.0f);
-		renderer.renderSprite(rgba, renderer.width()/2, renderer.height()/2, 3.0f, 3.0f, rot_z);
-		rot_z += 0.03f;*/
+		//renderer.renderSprite(pencils, 400, 300, 1.0f, 1.0f, 0.0f);
+		//renderer.renderSprite(kingkong, 900, 400, 1.0f, 1.0f, 0.0f);
+		//renderer.renderSprite(rgba, renderer.width()/2, renderer.height()/2, 3.0f, 3.0f, rot_z);
+		//rot_z += 0.03f;
 
 		// Swap buffers
 		glfwSwapBuffers(renderer.window());
@@ -123,9 +114,9 @@ int main(void) {
 	} // Check if the ESC key was pressed or the window was closed
 	while( glfwGetKey(renderer.window(), GLFW_KEY_ESCAPE ) != GLFW_PRESS && glfwWindowShouldClose(renderer.window()) == 0 );
 
-	/*delete pencils;
-	delete kingkong;
-	delete rgba;*/
+	//delete pencils;
+	//delete kingkong;
+	//delete rgba;
 
 	// Close OpenGL window and terminate GLFW
 	glfwTerminate();
