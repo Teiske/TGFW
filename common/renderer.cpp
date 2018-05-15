@@ -130,6 +130,13 @@ void Renderer::renderSprite(Sprite* sprite, float px, float py, float sx, float 
 	glDisableVertexAttribArray(vertexUVID);
 }
 
-void Renderer::renderScene(Scene * scene)
-{
+void Renderer::renderScene(Scene * scene) {
+	//Clear window
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	//Get camera view
+	computeMatricesFromInputs(_window);
+
+	glfwSwapBuffers(_window);
+	glfwPollEvents();
 }
