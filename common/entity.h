@@ -5,10 +5,10 @@
 
 #include <GL/glew.h>
 
-class Sprite {
+class Entity{
 	public:
-		Sprite(std::string image_path);
-		virtual ~Sprite();
+		Entity(std::string image_path);
+		virtual ~Entity();
 
 		GLuint texture() { return _texture; };
 		GLuint vertexbuffer() { return _vertexbuffer; };

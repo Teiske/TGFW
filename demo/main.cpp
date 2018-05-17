@@ -12,11 +12,11 @@
 
 #include <common/renderer.h>
 #include <common/camera.h>
-#include <common/sprite.h>
+#include <common/entity.h>
 #include <common/shader.h>
 
 int main(void) {
-	Renderer renderer(800, 600);
+	Renderer renderer/*(800, 600)*/;
 
 	Scene* scene = new Scene();
 
@@ -27,6 +27,32 @@ int main(void) {
 
 	do {
 		renderer.renderScene(scene);
+
+		static const GLfloat g_vertex_buffer_data[] = {
+			-0.5f, -0.5f, 0.0f,
+			0.5f, -0.5f, 0.0f,
+			0.0f,  0.5f, 0.0f
+		};
+
+		unsigned int VBO, VAO;
+		glGenBuffers(1, &VBO);
+		glBindBuffer(GL_ARRAY_BUFFER, VBO);
+		glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW);
+
+		glGenVertexArrays(1, &VAO);
+
+		// 1. bind Vertex Array Object
+		glBindVertexArray(VAO);
+		// 2. copy our vertices array in a buffer for OpenGL to use
+		glBindBuffer(GL_ARRAY_BUFFER, VBO);
+		glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW);
+		// 3. then set our vertex attributes pointers
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+		glEnableVertexAttribArray(0);
+		// 4. draw the object
+		glUseProgram(scene->programID);
+		glBindVertexArray(VAO);
+		glDrawArrays(GL_TRIANGLES, 0, 3);
 
 		// Render all Sprites (Sprite*, xpos, ypos, xscale, yscale, rotation)
 		//renderer.renderSprite(pencils, 400, 300, 1.0f, 1.0f, 0.0f);

@@ -8,9 +8,9 @@
 #include <common/renderer.h>
 #include <common/shader.h>
 
-Renderer::Renderer(unsigned int w, unsigned int h) {
-	_window_width = w;
-	_window_height = h;
+Renderer::Renderer(/*unsigned int w, unsigned int h*/) {
+	_window_width = 800;
+	_window_height = 600;
 
 	this->init();
 }
@@ -103,10 +103,10 @@ void Renderer::renderSprite(Sprite* sprite, float px, float py, float sx, float 
 	glBindBuffer(GL_ARRAY_BUFFER, sprite->vertexbuffer());
 	glVertexAttribPointer(
 		vertexPosition_modelspaceID,  // The attribute we want to configure
-		3,							// size : x+y+z => 3
-		GL_FLOAT,					 // type
-		GL_FALSE,					 // normalized?
-		0,							// stride
+		3,							  // size : x+y+z => 3
+		GL_FLOAT,					  // type
+		GL_FALSE,					  // normalized?
+		0,							  // stride
 		(void*)0					  // array buffer offset
 	);
 
@@ -115,11 +115,11 @@ void Renderer::renderSprite(Sprite* sprite, float px, float py, float sx, float 
 	glEnableVertexAttribArray(vertexUVID);
 	glBindBuffer(GL_ARRAY_BUFFER, sprite->uvbuffer());
 	glVertexAttribPointer(
-		vertexUVID,				   // The attribute we want to configure
-		2,							// size : U+V => 2
-		GL_FLOAT,					 // type
-		GL_FALSE,					 // normalized?
-		0,							// stride
+		vertexUVID,				      // The attribute we want to configure
+		2,							  // size : U+V => 2
+		GL_FLOAT,					  // type
+		GL_FALSE,					  // normalized?
+		0,							  // stride
 		(void*)0					  // array buffer offset
 	);
 
@@ -130,7 +130,7 @@ void Renderer::renderSprite(Sprite* sprite, float px, float py, float sx, float 
 	glDisableVertexAttribArray(vertexUVID);
 }
 
-void Renderer::renderScene(Scene * scene) {
+void Renderer::renderScene(Scene* scene) {
 	//Clear window
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 

@@ -5,10 +5,10 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtx/euler_angles.hpp>
 
-#include <common/sprite.h>
+#include <common/entity.h>
 
 
-Sprite::Sprite(std::string image_path) {
+Entity::Entity(std::string image_path) {
 	// these will be set correctly in loadTGA()
 	_width = 0;
 	_height = 0;
@@ -48,13 +48,13 @@ Sprite::Sprite(std::string image_path) {
 	glBufferData(GL_ARRAY_BUFFER, sizeof(g_uv_buffer_data), g_uv_buffer_data, GL_STATIC_DRAW);
 }
 
-Sprite::~Sprite() {
+Entity::~Entity() {
 	glDeleteBuffers(1, &_vertexbuffer);
 	glDeleteBuffers(1, &_uvbuffer);
 	glDeleteTextures(1, &_texture); // texture created in loadTGA() with glGenTextures()
 }
 
-GLuint Sprite::loadTGA(const std::string& imagepath) {
+GLuint Entity::loadTGA(const std::string& imagepath) {
 	std::cout << "Loading TGA: " << imagepath << std::endl;
 
 	FILE *file;

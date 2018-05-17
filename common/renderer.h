@@ -10,7 +10,7 @@
 
 class Renderer {
 	public:
-		Renderer(unsigned int w, unsigned int h);
+		Renderer(/*unsigned int w, unsigned int h*/);
 		virtual ~Renderer();
 
 		void renderSprite(Sprite* sprite, float px, float py, float sx, float sy, float rot);
