@@ -72,7 +72,7 @@ int Renderer::init() {
 	return 0;
 }
 
-void Renderer::renderSprite(Sprite* sprite, float px, float py, float sx, float sy, float rot) {
+void Renderer::renderEntity(Entity* entity, float px, float py, float sx, float sy, float rot) {
 	glm::mat4 viewMatrix  = getViewMatrix(); // get from Camera (Camera position and direction)
 	glm::mat4 modelMatrix = glm::mat4(1.0f);
 
@@ -92,7 +92,7 @@ void Renderer::renderSprite(Sprite* sprite, float px, float py, float sx, float 
 
 	// Bind our texture in Texture Unit 0
 	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, sprite->texture());
+	glBindTexture(GL_TEXTURE_2D, entity->texture());
 	// Set our "myTextureSampler" sampler to user Texture Unit 0
 	GLuint textureID  = glGetUniformLocation(_programID, "myTextureSampler");
 	glUniform1i(textureID, 0);
@@ -100,7 +100,7 @@ void Renderer::renderSprite(Sprite* sprite, float px, float py, float sx, float 
 	// 1st attribute buffer : vertices
 	GLuint vertexPosition_modelspaceID = glGetAttribLocation(_programID, "vertexPosition_modelspace");
 	glEnableVertexAttribArray(vertexPosition_modelspaceID);
-	glBindBuffer(GL_ARRAY_BUFFER, sprite->vertexbuffer());
+	glBindBuffer(GL_ARRAY_BUFFER, entity->vertexbuffer());
 	glVertexAttribPointer(
 		vertexPosition_modelspaceID,  // The attribute we want to configure
 		3,							  // size : x+y+z => 3
@@ -113,7 +113,7 @@ void Renderer::renderSprite(Sprite* sprite, float px, float py, float sx, float 
 	// 2nd attribute buffer : UVs
 	GLuint vertexUVID = glGetAttribLocation(_programID, "vertexUV");
 	glEnableVertexAttribArray(vertexUVID);
-	glBindBuffer(GL_ARRAY_BUFFER, sprite->uvbuffer());
+	glBindBuffer(GL_ARRAY_BUFFER, entity->uvbuffer());
 	glVertexAttribPointer(
 		vertexUVID,				      // The attribute we want to configure
 		2,							  // size : U+V => 2

@@ -5,7 +5,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtx/euler_angles.hpp>
 
-#include <common/sprite.h>
+#include <common/entity.h>
 #include <common/scene.h>
 
 class Renderer {
@@ -13,7 +13,7 @@ class Renderer {
 		Renderer(/*unsigned int w, unsigned int h*/);
 		virtual ~Renderer();
 
-		void renderSprite(Sprite* sprite, float px, float py, float sx, float sy, float rot);
+		void renderEntity(Entity* entity, float px, float py, float sx, float sy, float rot);
 		void renderScene(Scene* scene);
 		GLFWwindow* window() { return _window; };
 
