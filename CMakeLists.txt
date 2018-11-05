@@ -67,8 +67,8 @@ add_library(common
 	common/scene.cpp
 	common/shader.h
 	common/shader.cpp
-	common/sprite.h
-	common/sprite.cpp
+	common/entity.h
+	common/entity.cpp
 )
 
 # Demo

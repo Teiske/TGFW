@@ -13,8 +13,9 @@ class Renderer {
 		Renderer(/*unsigned int w, unsigned int h*/);
 		virtual ~Renderer();
 
-		void renderEntity(Entity* entity, float px, float py, float sx, float sy, float rot);
 		void renderScene(Scene* scene);
+		void renderEntity(Entity* entity/*, float px, float py, float sx, float sy, float rot*/);
+		
 		GLFWwindow* window() { return _window; };
 
 		unsigned int width() { return _window_width; };

@@ -9,8 +9,8 @@
 #include <common/shader.h>
 
 Renderer::Renderer(/*unsigned int w, unsigned int h*/) {
-	_window_width = 800;
-	_window_height = 600;
+	_window_width = 1280;
+	_window_height = 720;
 
 	this->init();
 }
@@ -62,7 +62,7 @@ int Renderer::init() {
 	glEnable(GL_CULL_FACE);
 
 	// Create and compile our GLSL program from the shaders
-	//GLuint _programID = loadShaders("shaders/vertex.vert", "shaders/fragment.frag");
+	GLuint _programID = LoadShaders("shaders/sprite.vert", "shaders/sprite.frag");
 
 	_projectionMatrix = glm::ortho(0.0f, (float)_window_width, (float)_window_height, 0.0f, 0.1f, 100.0f);
 
@@ -72,14 +72,31 @@ int Renderer::init() {
 	return 0;
 }
 
-void Renderer::renderEntity(Entity* entity, float px, float py, float sx, float sy, float rot) {
+void Renderer::renderScene(Scene* scene) {
+	//Clear window
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	//Get camera view
+	computeMatricesFromInputs(_window);
+
+	//Putting the sprites into a sprite list
+	int e = scene->entityList.size();
+	for (int i = 0; i < e; i++) {
+		this->renderEntity(scene->entityList[i]);
+	}
+
+	glfwSwapBuffers(_window);
+	glfwPollEvents();
+}
+
+void Renderer::renderEntity(Entity* entity/*, float px, float py, float sx, float sy, float rot*/) {
 	glm::mat4 viewMatrix  = getViewMatrix(); // get from Camera (Camera position and direction)
 	glm::mat4 modelMatrix = glm::mat4(1.0f);
 
 	// Build the Model matrix
-	glm::mat4 translationMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(px, py, 0.0f));
-	glm::mat4 rotationMatrix	= glm::eulerAngleYXZ(0.0f, 0.0f, rot);
-	glm::mat4 scalingMatrix	 = glm::scale(glm::mat4(1.0f), glm::vec3(sx, sy, 1.0f));
+	glm::mat4 translationMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(entity->_posx, entity->_posy, 0.0f));
+	glm::mat4 rotationMatrix	= glm::eulerAngleYXZ(0.0f, 0.0f, entity->_rot);
+	glm::mat4 scalingMatrix	 = glm::scale(glm::mat4(1.0f), glm::vec3(entity->_scalex, entity->_scaley, 1.0f));
 
 	modelMatrix = translationMatrix * rotationMatrix * scalingMatrix;
 
@@ -128,15 +145,4 @@ void Renderer::renderEntity(Entity* entity, float px, float py, float sx, float 
 
 	glDisableVertexAttribArray(vertexPosition_modelspaceID);
 	glDisableVertexAttribArray(vertexUVID);
-}
-
-void Renderer::renderScene(Scene* scene) {
-	//Clear window
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-	//Get camera view
-	computeMatricesFromInputs(_window);
-
-	glfwSwapBuffers(_window);
-	glfwPollEvents();
 }

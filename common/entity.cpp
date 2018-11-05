@@ -54,6 +54,15 @@ Entity::~Entity() {
 	glDeleteTextures(1, &_texture); // texture created in loadTGA() with glGenTextures()
 }
 
+void Entity::setupEntity(const std::string image_path, float px, float py, float uvwidth, float uvheight, float rot) {
+	this->_posx = px;
+	this->_posy = py;
+	this->_scalex = uvwidth;
+	this->_scaley = uvheight;
+	this->_rot = rot;
+
+}
+
 GLuint Entity::loadTGA(const std::string& imagepath) {
 	std::cout << "Loading TGA: " << imagepath << std::endl;
 

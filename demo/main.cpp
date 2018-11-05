@@ -13,7 +13,7 @@
 #include <common/renderer.h>
 #include <common/camera.h>
 #include <common/entity.h>
-#include <common/shader.h>
+#include <common/scene.h>
 
 int main(void) {
 	Renderer renderer/*(800, 600)*/;
@@ -28,32 +28,6 @@ int main(void) {
 	do {
 		renderer.renderScene(scene);
 
-		static const GLfloat g_vertex_buffer_data[] = {
-			-0.5f, -0.5f, 0.0f,
-			0.5f, -0.5f, 0.0f,
-			0.0f,  0.5f, 0.0f
-		};
-
-		unsigned int VBO, VAO;
-		glGenBuffers(1, &VBO);
-		glBindBuffer(GL_ARRAY_BUFFER, VBO);
-		glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW);
-
-		glGenVertexArrays(1, &VAO);
-
-		// 1. bind Vertex Array Object
-		glBindVertexArray(VAO);
-		// 2. copy our vertices array in a buffer for OpenGL to use
-		glBindBuffer(GL_ARRAY_BUFFER, VBO);
-		glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW);
-		// 3. then set our vertex attributes pointers
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-		glEnableVertexAttribArray(0);
-		// 4. draw the object
-		glUseProgram(scene->programID);
-		glBindVertexArray(VAO);
-		glDrawArrays(GL_TRIANGLES, 0, 3);
-
 		// Render all Sprites (Sprite*, xpos, ypos, xscale, yscale, rotation)
 		//renderer.renderSprite(pencils, 400, 300, 1.0f, 1.0f, 0.0f);
 		//renderer.renderSprite(kingkong, 900, 400, 1.0f, 1.0f, 0.0f);
@@ -62,6 +36,8 @@ int main(void) {
 
 	} // Check if the ESC key was pressed or the window was closed
 	while( glfwGetKey(renderer.window(), GLFW_KEY_ESCAPE ) != GLFW_PRESS && glfwWindowShouldClose(renderer.window()) == 0 );
+
+	delete scene;
 
 	//delete pencils;
 	//delete kingkong;
