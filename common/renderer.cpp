@@ -1,12 +1,4 @@
-#include <cstdio>
-#include <cstdlib>
-#include <string>
-#include <vector>
-#include <fstream>
-
-#include <common/camera.h>
 #include <common/renderer.h>
-#include <common/shader.h>
 
 Renderer::Renderer(/*unsigned int w, unsigned int h*/) {
 	_window_width = 1280;
@@ -94,9 +86,9 @@ void Renderer::renderEntity(Entity* entity/*, float px, float py, float sx, floa
 	glm::mat4 modelMatrix = glm::mat4(1.0f);
 
 	// Build the Model matrix
-	glm::mat4 translationMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(entity->_posx, entity->_posy, 0.0f));
-	glm::mat4 rotationMatrix	= glm::eulerAngleYXZ(0.0f, 0.0f, entity->_rot);
-	glm::mat4 scalingMatrix	 = glm::scale(glm::mat4(1.0f), glm::vec3(entity->_scalex, entity->_scaley, 1.0f));
+	glm::mat4 translationMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(entity->posx(), entity->posy(), 0.0f));
+	glm::mat4 rotationMatrix	= glm::eulerAngleYXZ(0.0f, 0.0f, entity->rot());
+	glm::mat4 scalingMatrix	 = glm::scale(glm::mat4(1.0f), glm::vec3(entity->scalex(), entity->scaley(), 1.0f));
 
 	modelMatrix = translationMatrix * rotationMatrix * scalingMatrix;
 

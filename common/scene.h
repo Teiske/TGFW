@@ -1,11 +1,27 @@
 #ifndef SCENE_H
 #define SCENE_H
 
+// Include standard headers
+#include <stdio.h>
+#include <stdlib.h>
+#include <string>
+#include <vector>
+#include <cstdio>
+#include <cstdlib>
+#include <fstream>
+#include <iostream>
+#include <ostream>
+
+// Include GLEW
 #include <GL/glew.h>
+
+// Include GLFW
 #include <glfw3.h>
 
-#include <iostream>
-#include <vector>
+// Include GLM
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtx/euler_angles.hpp>
 
 #include <common/entity.h>
 

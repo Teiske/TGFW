@@ -1,12 +1,24 @@
 #ifndef RENDERER_H
 #define RENDERER_H
 
+#include <cstdio>
+#include <cstdlib>
+#include <string>
+#include <vector>
+#include <fstream>
+#include <iostream>
+
+#include <GL/glew.h>
+#include <glfw3.h>
+
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtx/euler_angles.hpp>
 
+#include <common/camera.h>
 #include <common/entity.h>
 #include <common/scene.h>
+#include <common/shader.h>
 
 class Renderer {
 	public:

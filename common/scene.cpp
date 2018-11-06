@@ -1,4 +1,5 @@
 #include <iostream>
+#include <ostream>
 #include <cstdio>
 
 #include <common/scene.h>
@@ -9,7 +10,7 @@ Scene::Scene() {
 
 	entityList.push_back(_pencils);
 
-	_pencils->setupEntity("assets/pencils.tga", 940, 360, 1.0f, 1.0f, 0.0f);
+	_pencils->setupEntity(/*"assets/pencils.tga",*/ 940, 360, 1.0f, 1.0f, 0.0f);
 
 	printf("load scene.\n");
 }

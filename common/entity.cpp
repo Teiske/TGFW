@@ -1,14 +1,7 @@
-#include <iostream>
-#include <cstdio>
-
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtx/euler_angles.hpp>
-
 #include <common/entity.h>
 
 
-Entity::Entity(std::string image_path) {
+Entity::Entity(const std::string image_path) {
 	// these will be set correctly in loadTGA()
 	_width = 0;
 	_height = 0;
@@ -54,11 +47,11 @@ Entity::~Entity() {
 	glDeleteTextures(1, &_texture); // texture created in loadTGA() with glGenTextures()
 }
 
-void Entity::setupEntity(const std::string image_path, float px, float py, float uvwidth, float uvheight, float rot) {
+void Entity::setupEntity(/*const std::string image_path,*/ float px = 0.0f, float py = 0.0f, float sx = 1.0f, float sy = 1.0f, float rot = 0.0f) {
 	this->_posx = px;
 	this->_posy = py;
-	this->_scalex = uvwidth;
-	this->_scaley = uvheight;
+	this->_scalex = sx;
+	this->_scaley = sy;
 	this->_rot = rot;
 
 }
