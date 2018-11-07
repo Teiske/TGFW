@@ -71,7 +71,7 @@ void Renderer::renderScene(Scene* scene) {
 	//Get camera view
 	computeMatricesFromInputs(_window);
 
-	//Putting the sprites into a sprite list
+	//Putting the entitys into a entity list
 	int e = scene->entityList.size();
 	for (int i = 0; i < e; i++) {
 		this->renderEntity(scene->entityList[i]);
