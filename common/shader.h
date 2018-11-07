@@ -6,8 +6,8 @@
 
 class Shader {
 public:
-	Shader();
-	~Shader();
+	/*Shader();
+	~Shader();*/
 
 	GLuint LoadShaders(
 		const char* vertex_file_path,
@@ -15,7 +15,7 @@ public:
 	);
 
 private:
-
+	
 };
 
 #endif

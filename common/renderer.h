@@ -1,6 +1,14 @@
 #ifndef RENDERER_H
 #define RENDERER_H
 
+#include <cstdio>
+#include <cstdlib>
+#include <string>
+#include <vector>
+#include <fstream>
+#include <iostream>
+
+
 #include <GL/glew.h>
 #include <glfw3.h>
 
@@ -18,8 +26,8 @@ class Renderer {
 		Renderer(unsigned int w, unsigned int h);
 		virtual ~Renderer();
 
-		void renderSprite(Sprite* sprite, float px, float py, float sx, float sy, float rot);
-		//void renderScene(Scene* scene);
+		void renderSprite(Sprite* sprite/*,float px, float py, float sx, float sy, float rot*/);
+		void renderScene(Scene* scene);
 		GLFWwindow* window() { return _window; };
 
 		unsigned int width() { return _window_width; };

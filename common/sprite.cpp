@@ -53,6 +53,14 @@ Sprite::~Sprite() {
 	glDeleteTextures(1, &_texture); // texture created in loadTGA() with glGenTextures()
 }
 
+void Sprite::setupSprite(/*const std::string image_path,*/ float px, float py , float sx, float sy, float rot) {
+	this->_px = px;
+	this->_py = py;
+	this->_sx = sx;
+	this->_sy = sy;
+	this->_rot = rot;
+}
+
 GLuint Sprite::loadTGA(const std::string& imagepath) {
 	std::cout << "Loading TGA: " << imagepath << std::endl;
 

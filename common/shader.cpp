@@ -6,11 +6,11 @@
 
 #include <common/shader.h>
 
-Shader::Shader() {
-}
-
-Shader::~Shader() {
-}
+//Shader::Shader() {
+//}
+//
+//Shader::~Shader() {
+//}
 
 GLuint Shader::LoadShaders(const char* vertex_file_path, const char* fragment_file_path) {
 	// Create the shaders
