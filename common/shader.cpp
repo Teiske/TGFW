@@ -6,7 +6,13 @@
 
 #include <common/shader.h>
 
-GLuint LoadShaders(const char* vertex_file_path, const char* fragment_file_path) {
+Shader::Shader() {
+}
+
+Shader::~Shader() {
+}
+
+GLuint Shader::LoadShaders(const char* vertex_file_path, const char* fragment_file_path) {
 	// Create the shaders
 	GLuint vertexShaderID = glCreateShader(GL_VERTEX_SHADER);
 	GLuint fragmentShaderID = glCreateShader(GL_FRAGMENT_SHADER);

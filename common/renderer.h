@@ -10,6 +10,8 @@
 
 #include <common/sprite.h>
 #include <common/scene.h>
+#include <common/camera.h>
+#include <common/shader.h>
 
 class Renderer {
 	public:
@@ -17,7 +19,7 @@ class Renderer {
 		virtual ~Renderer();
 
 		void renderSprite(Sprite* sprite, float px, float py, float sx, float sy, float rot);
-		void renderScene(Scene* scene);
+		//void renderScene(Scene* scene);
 		GLFWwindow* window() { return _window; };
 
 		unsigned int width() { return _window_width; };
@@ -30,10 +32,10 @@ class Renderer {
 		unsigned int _window_width;
 		unsigned int _window_height;
 
-		GLuint loadShaders(
+		/*GLuint loadShaders(
 			const char* vertex_file_path,
 			const char* fragment_file_path
-		);
+		);*/
 
 		GLuint _programID;
 
