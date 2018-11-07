@@ -6,8 +6,6 @@
 
 #include <common/renderer.h>
 
-Shader shader;
-
 Renderer::Renderer(unsigned int w, unsigned int h) {
 	_window_width = w;
 	_window_height = h;

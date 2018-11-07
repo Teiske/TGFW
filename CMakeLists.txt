@@ -61,14 +61,16 @@ add_definitions(
 add_library(common
 	common/camera.h
 	common/camera.cpp
+	common/player.h
+	common/player.cpp
 	common/renderer.h
 	common/renderer.cpp
-	common/sprite.h
-	common/sprite.cpp
 	common/scene.h
 	common/scene.cpp
 	common/shader.h
 	common/shader.cpp
+	common/sprite.h
+	common/sprite.cpp
 )
 
 # Demo

@@ -10,7 +10,7 @@ class Sprite {
 		Sprite(std::string image_path);
 		virtual ~Sprite();
 
-		void setupSprite(/*const std::string image_path,*/ float px = 0.0f, float py = 0.0f, float sx = 1.0f, float sy = 1.0f, float rot = 0.0f);
+		void setupSprite(float px = 0.0f, float py = 0.0f, float sx = 1.0f, float sy = 1.0f, float rot = 0.0f);
 
 		GLuint texture() { return _texture; };
 		GLuint vertexbuffer() { return _vertexbuffer; };
@@ -21,6 +21,7 @@ class Sprite {
 		float sx() { return _sx; };
 		float sy() { return _sy; };
 		float rot() { return _rot; };
+
 		unsigned int width() { return _width; };
 		unsigned int height() { return _height; };
 

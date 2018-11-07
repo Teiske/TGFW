@@ -16,17 +16,19 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtx/euler_angles.hpp>
 
-#include <common/sprite.h>
-#include <common/scene.h>
 #include <common/camera.h>
+#include <common/scene.h>
 #include <common/shader.h>
+#include <common/sprite.h>
 
 class Renderer {
 	public:
+		Shader shader;
+
 		Renderer(unsigned int w, unsigned int h);
 		virtual ~Renderer();
 
-		void renderSprite(Sprite* sprite/*,float px, float py, float sx, float sy, float rot*/);
+		void renderSprite(Sprite* sprite);
 		void renderScene(Scene* scene);
 		GLFWwindow* window() { return _window; };
 
@@ -39,11 +41,6 @@ class Renderer {
 		GLFWwindow* _window;
 		unsigned int _window_width;
 		unsigned int _window_height;
-
-		/*GLuint loadShaders(
-			const char* vertex_file_path,
-			const char* fragment_file_path
-		);*/
 
 		GLuint _programID;
 

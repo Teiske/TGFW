@@ -33,10 +33,10 @@ class Scene {
 		std::vector<Sprite*> spritelist;		
 
 	private:
-		Sprite * player_1 = new Sprite("assets/Player_Textures/Spaceship_1_Player.tga");
-		Sprite* player_2 = new Sprite("assets/Player_Textures/Spaceship_2_Player.tga");
-		Sprite* player_3 = new Sprite("assets/Player_Textures/Spaceship_3_Player.tga");
-		Sprite* player_4 = new Sprite("assets/Player_Textures/Spaceship_4_Player.tga");
+		Sprite* player_1 = new Sprite("assets/Player_Textures/Spaceship_1/Spaceship_1_Player.tga");
+		Sprite* player_2 = new Sprite("assets/Player_Textures/Spaceship_1/Spaceship_2_Player.tga");
+		Sprite* player_3 = new Sprite("assets/Player_Textures/Spaceship_1/Spaceship_3_Player.tga");
+		Sprite* player_4 = new Sprite("assets/Player_Textures/Spaceship_1/Spaceship_4_Player.tga");
 
 		float rot_z = 0.0f;
 };

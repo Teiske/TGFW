@@ -16,7 +16,7 @@
 #include <common/shader.h>
 
 int main(void) {
-	Renderer renderer(1280, 720);
+	Renderer renderer(800, 600);
 
 	Scene* myScene = new Scene();
 
@@ -27,10 +27,10 @@ int main(void) {
 		// Render the scene
 		renderer.renderScene(myScene);
 
-
 	} // Check if the ESC key was pressed or the window was closed
 	while( glfwGetKey(renderer.window(), GLFW_KEY_ESCAPE ) != GLFW_PRESS && glfwWindowShouldClose(renderer.window()) == 0 );
 
+	// Delete the scene
 	delete myScene;
 
 	// Close OpenGL window and terminate GLFW
