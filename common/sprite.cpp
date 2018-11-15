@@ -7,7 +7,15 @@
 
 #include <common/sprite.h>
 
+Sprite::Sprite() {
+
+}
+
 Sprite::Sprite(std::string image_path) {
+	this->setup(image_path);
+}
+
+void Sprite::setup(std::string image_path) {
 	// these will be set correctly in loadTGA()
 	_width = 0;
 	_height = 0;
@@ -18,13 +26,13 @@ Sprite::Sprite(std::string image_path) {
 	// Our vertices. Tree consecutive floats give a 3D vertex; Three consecutive vertices give a triangle.
 	// A sprite has 1 face (quad) with 2 triangles each, so this makes 1*2=2 triangles, and 2*3 vertices
 	GLfloat g_vertex_buffer_data[18] = {
-		 0.5f * _width, -0.5f * _height, 0.0f,
+		0.5f * _width, -0.5f * _height, 0.0f,
 		-0.5f * _width, -0.5f * _height, 0.0f,
 		-0.5f * _width,  0.5f * _height, 0.0f,
 
 		-0.5f * _width,  0.5f * _height, 0.0f,
-		 0.5f * _width,  0.5f * _height, 0.0f,
-		 0.5f * _width, -0.5f * _height, 0.0f
+		0.5f * _width,  0.5f * _height, 0.0f,
+		0.5f * _width, -0.5f * _height, 0.0f
 	};
 
 	// Two UV coordinates for each vertex.
@@ -59,6 +67,10 @@ void Sprite::setupSprite(float px, float py , float sx, float sy, float rot) {
 	this->_sx = sx;
 	this->_sy = sy;
 	this->_rot = rot;
+}
+
+void Sprite::Update(GLFWwindow * window) {
+
 }
 
 GLuint Sprite::loadTGA(const std::string& imagepath) {

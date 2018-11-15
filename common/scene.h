@@ -28,17 +28,25 @@
 class Scene {
 	public:
 		Scene();
+		void UpdateScene(Scene* scene);
 		virtual ~Scene();
 
-		std::vector<Sprite*> spritelist;		
+		std::vector<Sprite*> spritelist;
+		//Sprite* Player_1() { return player_1; };
+		//Sprite* Player_2() { return player_2; };
+		//Sprite* Player_3() { return player_3; };
+
+		//Sprite* player_4 = new Player();
+		void addSprite(Sprite* s);
+		void setWindow(GLFWwindow *  window) { this->_window = window; };
 
 	private:
-		Sprite* player_1 = new Sprite("assets/Player_Textures/Spaceship_1/Spaceship_1_Player.tga");
-		Sprite* player_2 = new Sprite("assets/Player_Textures/Spaceship_1/Spaceship_2_Player.tga");
-		Sprite* player_3 = new Sprite("assets/Player_Textures/Spaceship_1/Spaceship_3_Player.tga");
-		Sprite* player_4 = new Sprite("assets/Player_Textures/Spaceship_1/Spaceship_4_Player.tga");
+		//Sprite* player_1 = new Sprite("assets/Player_Textures/Spaceship_1/Spaceship_2_Player.tga");
+		//Sprite* player_2 = new Sprite("assets/Player_Textures/Spaceship_1/Spaceship_2_Player.tga");
+		//Sprite* player_3 = new Sprite("assets/Player_Textures/Spaceship_1/Spaceship_2_Player.tga");
 
-		float rot_z = 0.0f;
+		//float rot_z = 0.0f;
+		GLFWwindow* _window;
 };
 
 #endif

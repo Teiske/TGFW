@@ -4,12 +4,19 @@
 #include <string>
 
 #include <GL/glew.h>
+#include <glfw3.h>
+
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtx/euler_angles.hpp>
 
 class Sprite {
 	public:
+		Sprite();
 		Sprite(std::string image_path);
 		virtual ~Sprite();
 
+		void setup(std::string image_path);
 		void setupSprite(float px = 0.0f, float py = 0.0f, float sx = 1.0f, float sy = 1.0f, float rot = 0.0f);
 
 		GLuint texture() { return _texture; };
@@ -24,6 +31,8 @@ class Sprite {
 
 		unsigned int width() { return _width; };
 		unsigned int height() { return _height; };
+
+		virtual void Update(GLFWwindow* window);
 
 	private:
 		GLuint loadTGA(const std::string& imagepath);

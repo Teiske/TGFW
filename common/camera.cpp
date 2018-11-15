@@ -3,7 +3,7 @@
 glm::mat4 _viewMatrix;
 
 // Initial position : on +Z
-glm::vec3 position = glm::vec3( 0, 0, 5 );
+//glm::vec3 position = glm::vec3( 0, 0, 5 );
 glm::vec3 cursor = glm::vec3( 0, 0, 0 );
 
 glm::mat4 getViewMatrix() {
@@ -14,7 +14,7 @@ glm::vec3 getCursor() {
 	return cursor;
 }
 
-float speed = 300.0f; // 300 units / second
+//float speed = 300.0f; // 300 units / second
 
 
 void computeMatricesFromInputs(GLFWwindow* window) {
@@ -34,27 +34,31 @@ void computeMatricesFromInputs(GLFWwindow* window) {
 	glm::vec3 right = glm::vec3(1, 0, 0);
 	glm::vec3 up = glm::vec3(0, -1, 0);
 
-	// Move up
-	if (glfwGetKey( window, GLFW_KEY_UP ) == GLFW_PRESS) {
-		position += up * deltaTime * speed;
-	}
-	// Move down
-	if (glfwGetKey( window, GLFW_KEY_DOWN ) == GLFW_PRESS) {
-		position -= up * deltaTime * speed;
-	}
-	// Strafe right
-	if (glfwGetKey( window, GLFW_KEY_RIGHT ) == GLFW_PRESS) {
-		position += right * deltaTime * speed;
-	}
-	// Strafe left
-	if (glfwGetKey( window, GLFW_KEY_LEFT ) == GLFW_PRESS) {
-		position -= right * deltaTime * speed;
-	}
+	//// Move up
+	//if (glfwGetKey( window, GLFW_KEY_UP ) == GLFW_PRESS) {
+	//	position += up * deltaTime * speed;
+	//}
+	//// Move down
+	//if (glfwGetKey( window, GLFW_KEY_DOWN ) == GLFW_PRESS) {
+	//	position -= up * deltaTime * speed;
+	//}
+	//// Strafe right
+	//if (glfwGetKey( window, GLFW_KEY_RIGHT ) == GLFW_PRESS) {
+	//	position += right * deltaTime * speed;
+	//}
+	//// Strafe left
+	//if (glfwGetKey( window, GLFW_KEY_LEFT ) == GLFW_PRESS) {
+	//	position -= right * deltaTime * speed;
+	//}
 
 	// View matrix
 	_viewMatrix = glm::lookAt(
-			position, // Camera is at (xpos,ypos,5), in World Space
-			position + glm::vec3(0, 0, -5), // and looks towards Z
+			//position, // Camera is at (xpos,ypos,5), in World Space
+			//position + glm::vec3(0, 0, -5), // and looks towards Z
+			//glm::vec3(0, 1, 0)  // Head is up (set to 0,-1,0 to look upside-down)
+
+			glm::vec3(0, 0, 5), // Camera is at (4,3,3), in World Space
+			glm::vec3(0, 0, 0), // and looks at the origin
 			glm::vec3(0, 1, 0)  // Head is up (set to 0,-1,0 to look upside-down)
 			);
 

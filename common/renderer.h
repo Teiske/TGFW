@@ -20,6 +20,7 @@
 #include <common/scene.h>
 #include <common/shader.h>
 #include <common/sprite.h>
+//#include <common/player.h>
 
 class Renderer {
 	public:
