@@ -16,7 +16,6 @@ Scene::Scene() {
 	//player_1->setupSprite(200, 300, 1.0f, 1.0f, rot_z);
 	//player_2->setupSprite(400, 300, 1.0f, 1.0f, 0.0f);
 	//player_3->setupSprite(600, 300, 1.0f, 1.0f, 0.0f);
-
 	//player_4->setupSprite(400, 300, 1.0f, 1.0f, 0.0f);
 
 
@@ -24,7 +23,9 @@ Scene::Scene() {
 }
 
 void Scene::UpdateScene(Scene* scene) {
+	Player player;
 
+	player.UpdatePlayer(scene->_window);
 	//printf("Updating Scene. \n");
 }
 
@@ -37,7 +38,6 @@ Scene::~Scene() {
 	//delete player_1;
 	//delete player_2;
 	//delete player_3;
-
 	//delete player_4;
 	
 	printf("Delete scene. \n");

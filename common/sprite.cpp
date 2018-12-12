@@ -12,10 +12,10 @@ Sprite::Sprite() {
 }
 
 Sprite::Sprite(std::string image_path) {
-	this->setup(image_path);
+	this->Setup(image_path);
 }
 
-void Sprite::setup(std::string image_path) {
+void Sprite::Setup(std::string image_path) {
 	// these will be set correctly in loadTGA()
 	_width = 0;
 	_height = 0;

@@ -16,7 +16,7 @@ class Sprite {
 		Sprite(std::string image_path);
 		virtual ~Sprite();
 
-		void setup(std::string image_path);
+		void Setup(std::string image_path);
 		void setupSprite(float px = 0.0f, float py = 0.0f, float sx = 1.0f, float sy = 1.0f, float rot = 0.0f);
 
 		GLuint texture() { return _texture; };

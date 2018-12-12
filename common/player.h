@@ -8,10 +8,10 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtx/euler_angles.hpp>
 
-#include <common/sprite.h>
+#include <common/entity.h>
 #include <common/renderer.h>
 
-class Player : public Sprite {
+class Player : public Entity {
 public:
 	
 	Player();

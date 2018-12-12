@@ -2,7 +2,7 @@
 
 Player::Player() {
 	this->position = glm::vec3(0, 0, 0);
-	this->setup("assets/Player_Textures/Spaceship_1/Spaceship_2_Player.tga");
+	this->Setup("assets/Player_Textures/Spaceship_1/Spaceship_2_Player.tga");
 }
 
 void Player::UpdatePlayer(GLFWwindow* window) {
@@ -18,22 +18,22 @@ void Player::UpdatePlayer(GLFWwindow* window) {
 
 	// Move up
 	if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS) {
-		position += up * deltaTime * speed;
+		this->position += up * deltaTime * speed;
 		printf("Arrow up pressed. \n");
 	}
 	// Move down
 	if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS) {
-		position -= up * deltaTime * speed;
+		this->position -= up * deltaTime * speed;
 		printf("Arrow down pressed. \n");
 	}
 	// Strafe right
 	if (glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS) {
-		position += right * deltaTime * speed;
+		this->position += right * deltaTime * speed;
 		printf("Arrow right pressed. \n");
 	}
 	// Strafe left
 	if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS) {
-		position -= right * deltaTime * speed;
+		this->position -= right * deltaTime * speed;
 		printf("Arrow left pressed. \n");
 	}
 }

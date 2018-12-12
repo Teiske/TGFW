@@ -61,6 +61,8 @@ add_definitions(
 add_library(common
 	common/camera.h
 	common/camera.cpp
+	common/entity.h
+	common/entity.cpp
 	common/player.h
 	common/player.cpp
 	common/renderer.h

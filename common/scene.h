@@ -24,8 +24,10 @@
 #include <glm/gtx/euler_angles.hpp>
 
 #include <common/sprite.h>
+#include <common/entity.h>
+#include <common/camera.h>
 
-class Scene {
+class Scene /*: public Entity*/ {
 	public:
 		Scene();
 		void UpdateScene(Scene* scene);
